@@ -11,7 +11,7 @@ public final class PetContract {
     public PetContract() {
     }
 
-    public static abstract class PetsEntry implements BaseColumns {
+    public static abstract class PetEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "pets";
 

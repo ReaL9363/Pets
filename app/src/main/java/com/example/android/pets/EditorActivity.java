@@ -81,11 +81,11 @@ public class EditorActivity extends AppCompatActivity {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals(getString(R.string.gender_male))) {
-                        mGender = PetContract.PetsEntry.STYLE_MALE; // Male
+                        mGender = PetContract.PetEntry.STYLE_MALE; // Male
                     } else if (selection.equals(getString(R.string.gender_female))) {
-                        mGender = PetContract.PetsEntry.STYLE_FEMALE;// Female
+                        mGender = PetContract.PetEntry.STYLE_FEMALE;// Female
                     } else {
-                        mGender = PetContract.PetsEntry.STYLE_UNKNWON;
+                        mGender = PetContract.PetEntry.STYLE_UNKNWON;
                         ; // Unknown
                     }
                 }
