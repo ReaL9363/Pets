@@ -2,6 +2,7 @@ package com.example.android.pets;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -157,21 +158,18 @@ public class EditorActivity extends AppCompatActivity {
         values.put(PetContract.PetEntry.COLUMN_PET_GENDER, mGender);
         values.put(PetContract.PetEntry.COLUMN_PET_WEIGHT, weight);
 
-        // Insert a new row for Toto in the database, returning the ID of that new row.
-        // The first argument for db.insert() is the pets table name.
-        // The second argument provides the name of a column in which the framework
-        // can insert NULL in the event that the ContentValues is empty (if
-        // this is set to "null", then the framework will not insert a row when
-        // there are no values).
-        // The third argument is the ContentValues object containing the info for Toto.
-        long newRowId = db.insert(PetContract.PetEntry.TABLE_NAME, null, values);
+        // Insert a new pet into the provider, returning the content URI for the new pet.
+        Uri newUri = getContentResolver().insert(PetContract.PetEntry.CONTENT_URI, values);
+
         // Show a toast message depending on whether or not the insertion was successful
-        if (newRowId == -1) {
-            // If the row ID is -1, then there was an error with insertion.
-            Toast.makeText(this, "Error with saving pet", Toast.LENGTH_SHORT).show();
+        if (newUri == null) {
+            // If the new content URI is null, then there was an error with insertion.
+            Toast.makeText(this, getString(R.string.editor_insert_pet_failed),
+                    Toast.LENGTH_SHORT).show();
         } else {
-            // Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(this, "Pet saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+            // Otherwise, the insertion was successful and we can display a toast.
+            Toast.makeText(this, getString(R.string.editor_insert_pet_successful),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }
